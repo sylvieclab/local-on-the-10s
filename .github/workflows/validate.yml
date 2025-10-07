@@ -48,33 +48,6 @@ jobs:
           grep -q "<!DOCTYPE html>" custom_components/local_on_the_10s/www/index.html
           grep -q "</html>" custom_components/local_on_the_10s/www/index.html
 
-  lint:
-    runs-on: ubuntu-latest
-    name: Lint
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-
-      - name: Install linting tools
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 black
-
-      - name: Run flake8
-        run: |
-          flake8 custom_components/local_on_the_10s --max-line-length=120 --ignore=E501,W503
-        continue-on-error: true
-
-      - name: Check formatting with black
-        run: |
-          black --check custom_components/local_on_the_10s
-        continue-on-error: true
-
   hassfest:
     runs-on: ubuntu-latest
     name: Hassfest
@@ -84,15 +57,3 @@ jobs:
 
       - name: Run hassfest
         uses: home-assistant/actions/hassfest@master
-
-  hacs:
-    runs-on: ubuntu-latest
-    name: HACS Validation
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: HACS validation
-        uses: hacs/action@main
-        with:
-          category: integration

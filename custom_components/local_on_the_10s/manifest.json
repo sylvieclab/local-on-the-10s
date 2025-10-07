@@ -5,9 +5,9 @@
   "config_flow": true,
   "dependencies": ["http"],
   "documentation": "https://github.com/sylvieclab/local-on-the-10s",
-  "issue_tracker": "https://github.com/sylvieclab/local-on-the-10s/issues",
   "integration_type": "service",
   "iot_class": "calculated",
+  "issue_tracker": "https://github.com/sylvieclab/local-on-the-10s/issues",
   "requirements": [],
   "version": "0.1.0"
 }
