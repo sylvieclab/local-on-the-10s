@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Local on the 10s",
+        "description": "Configure your local weather display. The Display Name should be in UPPERCASE (e.g., ATLANTA METRO, NEW YORK CITY, LONDON).",
+        "data": {
+          "location_name": "Location Name",
+          "display_name": "Display Name (shown on screen)",
+          "region_name": "Region/Station Name (optional)",
+          "weather_entity": "Weather Entity",
+          "display_duration": "Section Display Duration (seconds)",
+          "show_radar": "Show Radar Section",
+          "auto_start": "Auto Start Display"
+        },
+        "data_description": {
+          "location_name": "Internal name for this configuration (e.g., Home, Office)",
+          "display_name": "The name shown on the display (e.g., ATLANTA METRO, CHICAGO, TOKYO)",
+          "region_name": "Optional subtitle (e.g., Atlanta Int'l, Central Park, Heathrow)",
+          "display_duration": "How long each section displays before rotating (5-30 seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to weather service",
+      "invalid_entity": "Invalid weather entity selected",
+      "unknown": "Unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "This location is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Local on the 10s Options",
+        "description": "Update your weather display settings",
+        "data": {
+          "display_name": "Display Name (shown on screen)",
+          "region_name": "Region/Station Name (optional)",
+          "weather_entity": "Weather Entity",
+          "display_duration": "Section Display Duration (seconds)",
+          "show_radar": "Show Radar Section",
+          "auto_start": "Auto Start Display"
+        }
+      }
+    }
+  }
+}

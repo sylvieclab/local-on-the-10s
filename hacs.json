@@ -1,0 +1,8 @@
+{
+  "name": "Local on the 10s",
+  "content_in_root": false,
+  "filename": "local_on_the_10s",
+  "render_readme": true,
+  "domains": ["weather"],
+  "homeassistant": "2023.1.0"
+}

@@ -1,0 +1,12 @@
+{
+  "domain": "local_on_the_10s",
+  "name": "Local on the 10s",
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/yourusername/local-on-the-10s",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "requirements": [],
+  "version": "0.1.0"
+}

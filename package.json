@@ -1,0 +1,26 @@
+{
+  "name": "local-on-the-10s",
+  "version": "0.1.0",
+  "description": "A nostalgic weather display for Home Assistant inspired by mid-2000s local weather forecasts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/local-on-the-10s.git"
+  },
+  "keywords": [
+    "home-assistant",
+    "weather",
+    "display",
+    "forecast",
+    "local-weather"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/local-on-the-10s/issues"
+  },
+  "homepage": "https://github.com/yourusername/local-on-the-10s#readme"
+}
