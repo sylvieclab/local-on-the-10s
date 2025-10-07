@@ -32,13 +32,23 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Register the config API endpoint
     hass.http.register_view(LocalOnThe10sConfigView(entry))
 
-    # Register the panel
+    # Register the panel and assets
     await hass.http.async_register_static_paths(
         [
             StaticPathConfig(
                 url_path=f"/local/{DOMAIN}",
                 path=hass.config.path(f"custom_components/{DOMAIN}/www"),
                 cache_headers=False,
+            ),
+            StaticPathConfig(
+                url_path=f"/{DOMAIN}/assets",
+                path=hass.config.path(f"custom_components/{DOMAIN}/assets"),
+                cache_headers=True,
+            ),
+            StaticPathConfig(
+                url_path=f"/{DOMAIN}/backgrounds",
+                path=hass.config.path(f"custom_components/{DOMAIN}/assets/backgrounds"),
+                cache_headers=True,
             )
         ]
     )

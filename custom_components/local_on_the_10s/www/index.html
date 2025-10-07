@@ -14,18 +14,92 @@
         body {
             font-family: 'Arial', 'Helvetica', sans-serif;
             font-weight: bold;
-            background: linear-gradient(180deg, #1d4a7a 0%, #2d5f9e 30%, #4a7dbe 60%, #6a9dd5 100%);
+            background: #1a4570;
             overflow: hidden;
             height: 100vh;
             color: white;
-            image-rendering: -webkit-optimize-contrast;
-            -webkit-font-smoothing: antialiased;
+            image-rendering: auto;
+            position: relative;
+        }
+
+        /* Background image layer with rotation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--bg-image, url('/local_on_the_10s/backgrounds/clouds%20at%20dusk.jpg'));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: opacity 1s ease-in-out;
+            z-index: 0;
+        }
+
+        /* Dark overlay on background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Scan line overlay */
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.15) 3px
+                ),
+                /* Dark gradient overlay */
+                linear-gradient(180deg, 
+                    rgba(26, 69, 112, 0.75) 0%, 
+                    rgba(39, 90, 136, 0.70) 20%,
+                    rgba(58, 111, 160, 0.65) 40%,
+                    rgba(77, 133, 184, 0.60) 60%,
+                    rgba(98, 153, 204, 0.65) 80%,
+                    rgba(120, 174, 216, 0.70) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         #app {
             width: 100%;
             height: 100vh;
             position: relative;
+            z-index: 2;
+        }
+
+        /* Film grain overlay for authentic broadcast look */
+        #app::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAABlBMVEX///8AAABVwtN+AAABVUlEQVR4nO2YQQ7DIAxE7f0PTYe2qpQgO8ZmRZf5qxDvSQYcjLHW2l9bL6211tpfWy+ttdZaa39tvbT22l9bL6211v7aemmt/bX10lprrf219dL+v9b+2npprb221v7aemlrre219dL+v9b+2npprbW+tl5aa339tfXSWmt9bb201tpfWy+ttb+2Xlpr7a+tl9Zaa39tvbTW/tp6aa21v7ZeWmvtr62X1lr7a+ultdb+2npprb221v7aemlrrfW19dJaa31tvbTW2l9bL6211tpfWy+ttb+2Xlpr7a+tl9Zaa39tvbTW2l9bL6219tfWS2ut/bX10lprrf219dJaa39tvbTW/tp6aa21v7ZeWmvtr62X1lprf229tNZaX1svrb221v7aemlrrfW19dJaa31tvbTW2l9bL621v7ZeWmvtr62X1lr7a+ultdb+2npprb221v7aemlrrbW/tl5aa+2vrZf2BestEXXt5YsaAAAAAElFTkSuQmCC');
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 999;
+            animation: grainAnimate 0.5s steps(3) infinite;
+        }
+
+        @keyframes grainAnimate {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 10%); }
+            80% { transform: translate(-15%, 0); }
+            90% { transform: translate(10%, 5%); }
         }
 
         /* Animated cloud background - more opaque for 2005 look */
@@ -96,27 +170,34 @@
             padding: 40px;
         }
 
-        /* Section header - 2005 style with gradient */
+        /* Section header - 2005 broadcast style */
         .section-header {
-            background: linear-gradient(180deg, rgba(25, 40, 60, 0.95) 0%, rgba(15, 25, 40, 0.95) 100%);
-            padding: 10px 30px;
-            font-size: 36px;
+            background: 
+                linear-gradient(180deg, 
+                    rgba(35, 55, 75, 0.85) 0%, 
+                    rgba(25, 40, 60, 0.90) 50%,
+                    rgba(18, 30, 48, 0.92) 100%);
+            padding: 8px 30px;
+            font-size: 32px;
             font-weight: normal;
             text-transform: lowercase;
             margin-bottom: 0;
             text-shadow: 
+                0 0 8px rgba(255, 255, 255, 0.4),
                 2px 2px 4px rgba(0, 0, 0, 0.9),
-                0 0 10px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
+                0 0 12px rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
             width: 100%;
             max-width: 950px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border: 1px solid rgba(80, 120, 160, 0.4);
             border-bottom: none;
             box-shadow: 
+                0 3px 8px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 2px 8px rgba(0, 0, 0, 0.6);
+                0 0 20px rgba(0, 0, 0, 0.3);
+            filter: blur(0.3px);
         }
 
         /* Weather panels */
@@ -141,58 +222,75 @@
             to { opacity: 1; }
         }
 
-        /* Location header bar - 2005 LIME GREEN with bevel effect */
+        /* Location header bar - 2005 glossy gel style */
         .location-header {
-            background: linear-gradient(180deg, 
-                #b8e856 0%, 
-                #a0d840 15%,
-                #8cc632 50%,
-                #7ab428 85%,
-                #6a9c24 100%);
-            padding: 14px 30px;
-            font-size: 32px;
+            background: 
+                /* Glossy highlight */
+                linear-gradient(180deg, 
+                    rgba(255, 255, 255, 0.25) 0%,
+                    rgba(255, 255, 255, 0) 50%),
+                /* Main gradient */
+                linear-gradient(180deg, 
+                    #d8f050 0%, 
+                    #c8e048 15%,
+                    #b0cc38 40%,
+                    #98b828 70%,
+                    #80a020 100%);
+            padding: 13px 30px;
+            font-size: 30px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             box-shadow: 
-                0 5px 12px rgba(0, 0, 0, 0.6),
-                inset 0 2px 0 rgba(255, 255, 255, 0.35),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+                0 5px 15px rgba(0, 0, 0, 0.7),
+                inset 0 3px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 0, 0, 0.4);
             margin-bottom: 0;
             width: 100%;
             max-width: 950px;
             text-align: center;
             color: white;
             text-shadow: 
-                1px 1px 2px rgba(0, 0, 0, 0.6),
-                0 0 8px rgba(255, 255, 255, 0.3);
-            border-left: 2px solid rgba(0, 0, 0, 0.4);
-            border-right: 2px solid rgba(0, 0, 0, 0.4);
+                0 0 10px rgba(255, 255, 255, 0.5),
+                2px 2px 3px rgba(0, 0, 0, 0.8),
+                0 0 15px rgba(200, 220, 80, 0.6);
+            border-left: 1px solid rgba(0, 0, 0, 0.6);
+            border-right: 1px solid rgba(0, 0, 0, 0.6);
             position: relative;
+            filter: blur(0.3px);
         }
 
-        /* Data panel - 2005 style with texture and bevel */
+        /* Data panel - 2005 glossy broadcast style */
         .data-panel {
             background: 
+                /* Glass highlight */
                 linear-gradient(180deg, 
-                    rgba(45, 85, 145, 0.92) 0%,
-                    rgba(35, 70, 125, 0.92) 50%,
-                    rgba(30, 60, 110, 0.92) 100%);
-            border: 2px solid rgba(0, 0, 0, 0.4);
-            border-top: 3px solid rgba(60, 100, 160, 0.7);
+                    rgba(120, 160, 200, 0.15) 0%,
+                    rgba(80, 120, 180, 0) 30%),
+                /* Main gradient */
+                linear-gradient(180deg, 
+                    rgba(45, 80, 135, 0.88) 0%,
+                    rgba(38, 68, 118, 0.90) 40%,
+                    rgba(32, 58, 105, 0.92) 70%,
+                    rgba(28, 50, 92, 0.94) 100%);
+            border: 1px solid rgba(70, 110, 150, 0.5);
+            border-top: 2px solid rgba(90, 130, 180, 0.4);
             box-shadow: 
-                0 10px 20px rgba(0, 0, 0, 0.7),
-                inset 0 1px 0 rgba(120, 160, 210, 0.3),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-            padding: 45px;
+                0 10px 25px rgba(0, 0, 0, 0.8),
+                inset 0 2px 0 rgba(150, 190, 230, 0.2),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 0, 0, 0.5);
+            padding: 40px;
             width: 100%;
             max-width: 950px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
             position: relative;
+            filter: blur(0.3px);
         }
 
-        /* Add subtle noise texture overlay */
+        /* Heavy noise texture overlay for broadcast look */
         .data-panel::before {
             content: '';
             position: absolute;
@@ -201,7 +299,23 @@
             right: 0;
             bottom: 0;
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMCCwwNDhGXV8FhAAAAPklEQVQ4y2NgAAOGIJCBESBiABFMAFEMIAIMAAEQxQgQxQQQBREMIEVMQFFMAFEQwQhSBBYFKwIrYoRrAgkCAKSzBTcnN4TpAAAAAElFTkSuQmCC');
-            opacity: 0.03;
+            opacity: 0.08;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Additional glass reflection effect */
+        .data-panel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5%;
+            right: 5%;
+            height: 40%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 50%,
+                transparent 100%);
             pointer-events: none;
             border-radius: inherit;
         }
@@ -290,23 +404,22 @@
         .detail-label {
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 22px;
-            letter-spacing: 1.5px;
-            color: #bad5f0;
+            font-size: 20px;
+            letter-spacing: 1.2px;
+            color: #a8c8e8;
             text-shadow: 
-                1px 1px 3px rgba(0, 0, 0, 0.7),
-                0 0 8px rgba(0, 0, 0, 0.4);
+                1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .detail-value {
             font-weight: bold;
             text-align: right;
-            font-size: 28px;
-            letter-spacing: 0.5px;
+            font-size: 26px;
+            letter-spacing: 0.3px;
             text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.7),
-                0 0 10px rgba(255, 255, 255, 0.2);
+                2px 2px 3px rgba(0, 0, 0, 0.8);
             font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
         }
 
         /* Forecast Grid */
@@ -318,24 +431,24 @@
 
         .forecast-card {
             background: linear-gradient(180deg, 
-                rgba(60, 110, 180, 0.7) 0%,
-                rgba(45, 90, 155, 0.7) 100%);
-            padding: 22px 12px;
+                rgba(55, 100, 165, 0.75) 0%,
+                rgba(45, 85, 145, 0.75) 100%);
+            padding: 20px 10px;
             text-align: center;
-            border: 2px solid rgba(80, 130, 200, 0.4);
-            border-radius: 4px;
+            border: 1px solid rgba(70, 110, 170, 0.5);
+            border-radius: 3px;
             box-shadow: 
-                0 4px 8px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(120, 170, 230, 0.3);
+                0 3px 6px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(100, 150, 210, 0.2);
         }
 
         .forecast-day {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 18px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15px;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .forecast-icon {
@@ -346,20 +459,20 @@
         }
 
         .forecast-condition {
-            font-size: 16px;
-            margin: 12px 0;
+            font-size: 15px;
+            margin: 10px 0;
             line-height: 1.3;
-            min-height: 50px;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            min-height: 45px;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .forecast-temps {
-            font-size: 36px;
+            font-size: 34px;
             font-weight: bold;
-            margin-top: 12px;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-top: 10px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
         }
 
         .temp-high {
@@ -372,20 +485,22 @@
 
         /* Text forecast */
         .text-forecast {
-            font-size: 24px;
-            line-height: 1.7;
+            font-size: 22px;
+            line-height: 1.6;
             text-align: left;
             max-width: 850px;
             margin: 0 auto;
             font-weight: normal;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            color: #e8f0f8;
         }
 
         .forecast-period {
             font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 28px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 8px;
+            font-size: 26px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            color: #5fc4d4;
         }
 
         .text-forecast p {
@@ -552,8 +667,28 @@
             display_duration: 10
         };
 
-        // Get the base path for assets - relative to the www directory
-        const ASSETS_PATH = './assets/svg';
+        // Background images array
+        const BACKGROUNDS = [
+            '/local_on_the_10s/backgrounds/clouds%20at%20dusk.jpg',
+            '/local_on_the_10s/backgrounds/dark%20clouds%20evening%20time.jpg'
+        ];
+
+        let currentBackgroundIndex = 0;
+
+        // Set background image
+        function setBackgroundImage(index) {
+            const bgIndex = index % BACKGROUNDS.length;
+            document.body.style.setProperty('--bg-image', `url('${BACKGROUNDS[bgIndex]}')`);
+        }
+
+        // Update background when section changes
+        function updateBackground() {
+            currentBackgroundIndex = (currentBackgroundIndex + 1) % BACKGROUNDS.length;
+            setBackgroundImage(currentBackgroundIndex);
+        }
+
+        // Get the base path for assets - use the registered static path
+        const ASSETS_PATH = '/local_on_the_10s/assets/svg';
 
         // Map Home Assistant conditions to Weather Channel icon filenames
         function getWeatherIconPath(condition, isNight = false) {
@@ -623,13 +758,13 @@
             }
 
             try {
-                const token = window.parent.localStorage.getItem('hassTokens');
-                if (!token) {
+                const tokenStr = window.parent.localStorage.getItem('hassTokens');
+                if (!tokenStr) {
                     console.error('No Home Assistant token found');
                     return;
                 }
 
-                const tokens = JSON.parse(token);
+                const tokens = JSON.parse(tokenStr);
                 const response = await fetch(`/api/local_on_the_10s/config/${configId}`, {
                     headers: {
                         'Authorization': `Bearer ${tokens.access_token}`,
@@ -671,10 +806,10 @@
         // Fetch weather data
         async function fetchWeather() {
             try {
-                const token = window.parent.localStorage.getItem('hassTokens');
-                if (!token) return;
+                const tokenStr = window.parent.localStorage.getItem('hassTokens');
+                if (!tokenStr) return;
 
-                const tokens = JSON.parse(token);
+                const tokens = JSON.parse(tokenStr);
                 
                 // Fetch current weather state
                 const response = await fetch('/api/states', {
@@ -922,9 +1057,13 @@
             
             const next = document.getElementById(`${sections[currentSectionIndex]}-section`);
             next.classList.add('active');
+            
+            // Update background image
+            updateBackground();
         }
 
         // Initialize
+        setBackgroundImage(0); // Set initial background
         updateTime();
         setInterval(updateTime, 1000);
         
