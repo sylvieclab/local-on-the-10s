@@ -8,7 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv
-from homeassistant.components.http import HomeAssistantView
+from homeassistant.components.http import HomeAssistantView, StaticPathConfig
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -34,11 +34,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Register the panel
     await hass.http.async_register_static_paths(
         [
-            {
-                "url": f"/local/{DOMAIN}",
-                "path": hass.config.path(f"custom_components/{DOMAIN}/www"),
-                "cache_headers": False,
-            }
+            StaticPathConfig(
+                url_path=f"/local/{DOMAIN}",
+                path=hass.config.path(f"custom_components/{DOMAIN}/www"),
+                cache_headers=False,
+            )
         ]
     )
 
