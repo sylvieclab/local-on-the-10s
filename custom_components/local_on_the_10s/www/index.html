@@ -12,11 +12,14 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(180deg, #2b5898 0%, #5a8bc4 50%, #87b5dd 100%);
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: bold;
+            background: linear-gradient(180deg, #1d4a7a 0%, #2d5f9e 30%, #4a7dbe 60%, #6a9dd5 100%);
             overflow: hidden;
             height: 100vh;
             color: white;
+            image-rendering: -webkit-optimize-contrast;
+            -webkit-font-smoothing: antialiased;
         }
 
         #app {
@@ -25,7 +28,7 @@
             position: relative;
         }
 
-        /* Animated cloud background */
+        /* Animated cloud background - more opaque for 2005 look */
         .clouds {
             position: absolute;
             top: 0;
@@ -34,21 +37,22 @@
             bottom: 0;
             overflow: hidden;
             z-index: 1;
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 100px;
             animation: float 80s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .cloud::before,
         .cloud::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 100px;
         }
 
@@ -84,7 +88,7 @@
         .content {
             position: relative;
             z-index: 10;
-            height: 100%;
+            height: calc(100% - 70px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -92,14 +96,27 @@
             padding: 40px;
         }
 
-        /* Section header */
+        /* Section header - 2005 style with gradient */
         .section-header {
-            font-size: 42px;
+            background: linear-gradient(180deg, rgba(25, 40, 60, 0.95) 0%, rgba(15, 25, 40, 0.95) 100%);
+            padding: 10px 30px;
+            font-size: 36px;
             font-weight: normal;
             text-transform: lowercase;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            letter-spacing: 1px;
+            margin-bottom: 0;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.9),
+                0 0 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            width: 100%;
+            max-width: 950px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-bottom: none;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
         /* Weather panels */
@@ -111,7 +128,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
+            padding: 60px 40px 90px;
         }
 
         .weather-section.active {
@@ -124,123 +141,229 @@
             to { opacity: 1; }
         }
 
-        /* Location header bar */
+        /* Location header bar - 2005 LIME GREEN with bevel effect */
         .location-header {
-            background: linear-gradient(180deg, #7fb842 0%, #6a9c38 100%);
-            padding: 8px 20px;
-            font-size: 28px;
+            background: linear-gradient(180deg, 
+                #b8e856 0%, 
+                #a0d840 15%,
+                #8cc632 50%,
+                #7ab428 85%,
+                #6a9c24 100%);
+            padding: 14px 30px;
+            font-size: 32px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            margin-bottom: 15px;
+            letter-spacing: 4px;
+            box-shadow: 
+                0 5px 12px rgba(0, 0, 0, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+            margin-bottom: 0;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             text-align: center;
+            color: white;
+            text-shadow: 
+                1px 1px 2px rgba(0, 0, 0, 0.6),
+                0 0 8px rgba(255, 255, 255, 0.3);
+            border-left: 2px solid rgba(0, 0, 0, 0.4);
+            border-right: 2px solid rgba(0, 0, 0, 0.4);
+            position: relative;
         }
 
-        /* Data panel */
+        /* Data panel - 2005 style with texture and bevel */
         .data-panel {
-            background: rgba(30, 80, 150, 0.85);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            padding: 30px;
+            background: 
+                linear-gradient(180deg, 
+                    rgba(45, 85, 145, 0.92) 0%,
+                    rgba(35, 70, 125, 0.92) 50%,
+                    rgba(30, 60, 110, 0.92) 100%);
+            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-top: 3px solid rgba(60, 100, 160, 0.7);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 rgba(120, 160, 210, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+            padding: 45px;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            position: relative;
         }
 
-        /* Current Conditions Layout */
+        /* Add subtle noise texture overlay */
+        .data-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMCCwwNDhGXV8FhAAAAPklEQVQ4y2NgAAOGIJCBESBiABFMAFEMIAIMAAEQxQgQxQQQBREMIEVMQFFMAFEQwQhSBBYFKwIrYoRrAgkCAKSzBTcnN4TpAAAAAElFTkSuQmCC');
+            opacity: 0.03;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Current Conditions Layout - 2005 TWO COLUMN */
         .current-layout {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            align-items: center;
+            grid-template-columns: 340px 1fr;
+            gap: 45px;
+            align-items: stretch;
+            min-height: 350px;
         }
 
+        /* LEFT PANEL - Icon and Temperature */
         .current-icon-temp {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 3px solid rgba(80, 120, 180, 0.4);
+            padding-right: 35px;
+            position: relative;
+        }
+
+        /* Add subtle vertical gradient to divider */
+        .current-icon-temp::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(180deg, 
+                transparent 0%,
+                rgba(120, 160, 210, 0.5) 50%,
+                transparent 100%);
         }
 
         .weather-icon-large {
-            font-size: 80px;
-            margin-bottom: 10px;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 18px;
+            filter: 
+                drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6))
+                drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
         }
 
         .condition-text {
-            font-size: 22px;
-            margin: 10px 0;
-            font-weight: normal;
+            font-size: 28px;
+            margin: 18px 0 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.8),
+                0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .temp-large {
-            font-size: 100px;
+            font-size: 140px;
             font-weight: bold;
-            line-height: 1;
+            line-height: 0.85;
+            text-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.3);
+            letter-spacing: -8px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
+        /* RIGHT PANEL - Details Grid */
         .current-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px 30px;
-            font-size: 24px;
+            gap: 20px 40px;
+            padding-left: 25px;
+            align-content: center;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            align-items: center;
+            padding: 10px 0;
         }
 
         .detail-label {
             text-transform: uppercase;
-            font-weight: normal;
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 1.5px;
+            color: #bad5f0;
+            text-shadow: 
+                1px 1px 3px rgba(0, 0, 0, 0.7),
+                0 0 8px rgba(0, 0, 0, 0.4);
         }
 
         .detail-value {
             font-weight: bold;
             text-align: right;
+            font-size: 28px;
+            letter-spacing: 0.5px;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.7),
+                0 0 10px rgba(255, 255, 255, 0.2);
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         /* Forecast Grid */
         .forecast-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 14px;
         }
 
         .forecast-card {
-            background: rgba(50, 100, 170, 0.6);
-            padding: 20px;
+            background: linear-gradient(180deg, 
+                rgba(60, 110, 180, 0.7) 0%,
+                rgba(45, 90, 155, 0.7) 100%);
+            padding: 22px 12px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(80, 130, 200, 0.4);
+            border-radius: 4px;
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(120, 170, 230, 0.3);
         }
 
         .forecast-day {
             font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .forecast-icon {
-            font-size: 56px;
-            margin: 15px 0;
+            width: 64px;
+            height: 64px;
+            margin: 18px auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
         }
 
         .forecast-condition {
-            font-size: 18px;
-            margin: 10px 0;
-            text-transform: capitalize;
+            font-size: 16px;
+            margin: 12px 0;
+            line-height: 1.3;
+            min-height: 50px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
         .forecast-temps {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 12px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .temp-high {
-            color: #ffeb3b;
+            color: #ffffff;
         }
 
         .temp-low {
@@ -249,69 +372,116 @@
 
         /* Text forecast */
         .text-forecast {
-            font-size: 22px;
-            line-height: 1.6;
+            font-size: 24px;
+            line-height: 1.7;
             text-align: left;
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: normal;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
         .forecast-period {
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .text-forecast p {
+            margin-bottom: 28px;
         }
 
         /* Regional map placeholder */
         .regional-map {
-            background: rgba(100, 120, 100, 0.5);
-            padding: 40px;
+            background: linear-gradient(135deg, 
+                rgba(80, 100, 90, 0.6) 0%,
+                rgba(100, 120, 110, 0.5) 100%);
+            padding: 60px;
             text-align: center;
-            font-size: 20px;
+            font-size: 22px;
             min-height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(120, 140, 130, 0.5);
+            border-radius: 4px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
-        /* Footer info bar */
+        /* Footer info bar - 2005 style */
         .footer-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 30px;
+            background: linear-gradient(180deg, 
+                rgba(20, 35, 50, 0.92) 0%,
+                rgba(15, 25, 40, 0.95) 100%);
+            padding: 18px 45px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 20px;
+            font-size: 24px;
             z-index: 100;
+            box-shadow: 
+                0 -4px 15px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-top: 2px solid rgba(60, 90, 120, 0.4);
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
         }
 
         .current-location {
-            font-weight: normal;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .current-temp-small {
             font-weight: bold;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .time-display {
             font-weight: bold;
-            font-size: 22px;
+            font-size: 28px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .twc-logo {
-            background: #0066cc;
-            padding: 8px 12px;
-            border-radius: 4px;
+            background: linear-gradient(180deg, 
+                #0077dd 0%,
+                #0066cc 50%,
+                #0055aa 100%);
+            padding: 11px 18px;
+            border-radius: 5px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 11px;
+            letter-spacing: 0.8px;
+            line-height: 1.4;
+            text-align: center;
+            box-shadow: 
+                0 3px 8px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 100, 200, 0.6);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Loading */
         .loading {
-            font-size: 32px;
+            font-size: 28px;
             text-align: center;
+            padding: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -363,11 +533,11 @@
         </div>
 
         <div class="footer-bar">
-            <div>
-                <span class="current-location" id="footer-location">CURRENTLY</span>
-                <span class="current-temp-small" id="footer-temp">--°</span>
+            <div class="footer-left">
+                <span class="current-location" id="footer-location">ROCKLAND</span>
+                <span class="current-temp-small" id="footer-temp">19°</span>
             </div>
-            <div class="time-display" id="time-display">--:--</div>
+            <div class="time-display" id="time-display">3:39 PM</div>
             <div class="twc-logo">LOCAL<br>WEATHER</div>
         </div>
     </div>
@@ -382,28 +552,39 @@
             display_duration: 10
         };
 
-        // Weather icon mapping
-        const weatherIcons = {
-            'clear-night': '🌙',
-            'cloudy': '☁️',
-            'fog': '🌫️',
-            'hail': '🧊',
-            'lightning': '⚡',
-            'lightning-rainy': '⛈️',
-            'partlycloudy': '⛅',
-            'pouring': '🌧️',
-            'rainy': '🌦️',
-            'snowy': '❄️',
-            'snowy-rainy': '🌨️',
-            'sunny': '☀️',
-            'windy': '💨',
-            'windy-variant': '🌬️',
-            'exceptional': '⚠️'
-        };
+        // Map Home Assistant conditions to Weather Channel icon filenames
+        function getWeatherIconPath(condition, isNight = false) {
+            const iconMap = {
+                'clear-night': 'Fair-Mostly Clear (night).png',
+                'cloudy': 'Cloudy.png',
+                'fog': 'Foggy Conditions.png',
+                'hail': 'Sleet.png',
+                'lightning': 'Thunderstorms.png',
+                'lightning-rainy': 'Thunderstorms.png',
+                'partlycloudy': isNight ? 'Partly Cloudy (night).png' : 'Partly Cloudy (day).png',
+                'pouring': 'Heavy Rain and Wind.png',
+                'rainy': 'Rain.png',
+                'snowy': 'Snow.png',
+                'snowy-rainy': 'Rain and Snow.png',
+                'sunny': 'Sunny.png',
+                'windy': 'Windy Conditions.png',
+                'windy-variant': 'Clear and Windy.png',
+                'exceptional': 'Not Available.png'
+            };
+            
+            const filename = iconMap[condition] || 'Sunny.png';
+            return `/local_on_the_10s/assets/svg/${encodeURIComponent(filename)}`;
+        }
+
+        function getWeatherIcon(condition, isNight = false) {
+            const iconPath = getWeatherIconPath(condition, isNight);
+            return `<img src="${iconPath}" alt="${condition}" style="width: 100%; height: 100%; object-fit: contain;">`;
+        }
 
         let currentSectionIndex = 0;
         const sections = ['current', 'forecast', 'text-forecast', 'regional'];
         let weatherData = null;
+        let forecastData = null;
 
         // Get config ID from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -469,6 +650,8 @@
                 if (!token) return;
 
                 const tokens = JSON.parse(token);
+                
+                // Fetch current weather state
                 const response = await fetch('/api/states', {
                     headers: {
                         'Authorization': `Bearer ${tokens.access_token}`,
@@ -480,6 +663,33 @@
                 weatherData = states.find(entity => 
                     entity.entity_id === config.weather_entity
                 );
+
+                // Fetch forecast data using the weather service
+                if (config.weather_entity) {
+                    try {
+                        const forecastResponse = await fetch('/api/services/weather/get_forecasts?return_response', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${tokens.access_token}`,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                entity_id: config.weather_entity,
+                                type: 'daily'
+                            })
+                        });
+
+                        if (forecastResponse.ok) {
+                            const forecastResult = await forecastResponse.json();
+                            if (forecastResult && forecastResult.service_response && 
+                                forecastResult.service_response[config.weather_entity]) {
+                                forecastData = forecastResult.service_response[config.weather_entity].forecast;
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Error fetching forecasts:', err);
+                    }
+                }
 
                 if (weatherData) {
                     updateDisplay();
@@ -499,10 +709,13 @@
             updateCurrentConditions(attr);
             
             // Update forecast
-            updateForecast(attr);
-            
-            // Update text forecast
-            updateTextForecast(attr);
+            if (forecastData && forecastData.length > 0) {
+                updateForecast({ forecast: forecastData });
+                updateTextForecast({ ...attr, forecast: forecastData });
+            } else if (attr.forecast && attr.forecast.length > 0) {
+                updateForecast(attr);
+                updateTextForecast(attr);
+            }
             
             // Update footer
             document.getElementById('footer-temp').textContent = 
@@ -512,37 +725,43 @@
         function updateCurrentConditions(attr) {
             const section = document.getElementById('current-section').querySelector('.data-panel');
             
+            // Determine if it's night
+            const hour = new Date().getHours();
+            const isNight = hour >= 19 || hour < 6;
+            
+            const iconHtml = getWeatherIcon(weatherData.state, isNight);
+            
             const html = `
                 <div class="current-layout">
                     <div class="current-icon-temp">
-                        <div class="weather-icon-large">${weatherIcons[weatherData.state] || '🌤️'}</div>
+                        <div class="weather-icon-large">${iconHtml}</div>
                         <div class="condition-text">${formatCondition(weatherData.state)}</div>
-                        <div class="temp-large">${Math.round(attr.temperature)}°</div>
+                        <div class="temp-large">${Math.round(attr.temperature)}</div>
                     </div>
                     <div class="current-details">
                         <div class="detail-row">
-                            <span class="detail-label">Humidity</span>
+                            <span class="detail-label">HUMIDITY</span>
                             <span class="detail-value">${attr.humidity}%</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Dew Point</span>
+                            <span class="detail-label">DEW POINT</span>
                             <span class="detail-value">${attr.dew_point ? Math.round(attr.dew_point) + '°' : 'N/A'}</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Pressure</span>
-                            <span class="detail-value">${attr.pressure} ${attr.pressure_unit || 'hPa'}</span>
+                            <span class="detail-label">PRESSURE</span>
+                            <span class="detail-value">${formatPressure(attr)}</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Visibility</span>
-                            <span class="detail-value">${attr.visibility || 'N/A'} ${attr.visibility_unit || 'km'}</span>
+                            <span class="detail-label">VISIBILITY</span>
+                            <span class="detail-value">${formatVisibility(attr)}</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Wind</span>
-                            <span class="detail-value">${attr.wind_bearing || ''} ${Math.round(attr.wind_speed)}</span>
+                            <span class="detail-label">WIND</span>
+                            <span class="detail-value">${formatWind(attr)}</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Gusts</span>
-                            <span class="detail-value">${attr.wind_gust_speed ? Math.round(attr.wind_gust_speed) : 'None'}</span>
+                            <span class="detail-label">GUSTS</span>
+                            <span class="detail-value">${formatGusts(attr)}</span>
                         </div>
                     </div>
                 </div>
@@ -552,22 +771,31 @@
         }
 
         function updateForecast(attr) {
-            if (!attr.forecast || attr.forecast.length === 0) return;
+            if (!attr.forecast || attr.forecast.length === 0) {
+                document.getElementById('forecast-grid').innerHTML = 
+                    '<div style="grid-column: 1/-1; text-align: center; padding: 40px; font-size: 22px;">No forecast data available</div>';
+                return;
+            }
             
             const container = document.getElementById('forecast-grid');
             const html = attr.forecast.slice(0, 7).map(day => {
                 const date = new Date(day.datetime);
                 const dayName = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
                 
+                const highTemp = day.temperature !== undefined ? Math.round(day.temperature) : '--';
+                const lowTemp = day.templow !== undefined ? Math.round(day.templow) : '--';
+                
+                const iconHtml = getWeatherIcon(day.condition, false);
+                
                 return `
                     <div class="forecast-card">
                         <div class="forecast-day">${dayName}</div>
-                        <div class="forecast-icon">${weatherIcons[day.condition] || '🌤️'}</div>
+                        <div class="forecast-icon">${iconHtml}</div>
                         <div class="forecast-condition">${formatCondition(day.condition)}</div>
                         <div class="forecast-temps">
-                            <span class="temp-high">${Math.round(day.temperature)}</span>
+                            <span class="temp-high">${highTemp}°</span>
                             <br>
-                            <span class="temp-low">${Math.round(day.templow)}</span>
+                            <span class="temp-low">${lowTemp}°</span>
                         </div>
                     </div>
                 `;
@@ -580,28 +808,84 @@
             const container = document.getElementById('text-forecast');
             let text = '';
             
-            if (attr.forecast && attr.forecast.length > 0) {
+            if (attr.forecast && attr.forecast.length >= 2) {
                 const today = attr.forecast[0];
                 const tomorrow = attr.forecast[1];
                 
+                const hour = new Date().getHours();
+                const isNight = hour >= 18 || hour < 6;
+                
+                const tonightTemp = today.templow !== undefined ? Math.round(today.templow) : '--';
+                const tomorrowHigh = tomorrow.temperature !== undefined ? Math.round(tomorrow.temperature) : '--';
+                const tomorrowLow = tomorrow.templow !== undefined ? Math.round(tomorrow.templow) : '--';
+                
                 text = `
-                    <div class="forecast-period">Tonight</div>
-                    <p>${formatCondition(today.condition)}. Low ${Math.round(today.templow)}°. 
-                    Winds ${attr.wind_bearing || 'variable'} at ${Math.round(attr.wind_speed)} ${attr.wind_speed_unit || 'km/h'}.</p>
-                    <br>
+                    <div class="forecast-period">${isNight ? 'Tonight' : 'This Evening'}</div>
+                    <p>${formatCondition(today.condition)}. Low ${tonightTemp}°. 
+                    Winds ${formatWindDirection(attr.wind_bearing)} at ${Math.round(attr.wind_speed)} ${attr.wind_speed_unit || 'km/h'}.</p>
+                    
                     <div class="forecast-period">Tomorrow</div>
-                    <p>${formatCondition(tomorrow.condition)}. High ${Math.round(tomorrow.temperature)}°. 
-                    Low ${Math.round(tomorrow.templow)}°.</p>
+                    <p>${formatCondition(tomorrow.condition)}. High ${tomorrowHigh}°. Low ${tomorrowLow}°. ${tomorrow.precipitation_probability ? `Chance of precipitation ${tomorrow.precipitation_probability}%.` : ''}</p>
                 `;
+            } else {
+                text = '<div style="padding: 20px; text-align: center;">Detailed forecast information not available</div>';
             }
             
             container.innerHTML = text;
         }
 
         function formatCondition(condition) {
-            return condition.split('-').map(word => 
+            if (!condition) return 'Unknown';
+            const formatted = condition.split('-').map(word => 
                 word.charAt(0).toUpperCase() + word.slice(1)
             ).join(' ');
+            
+            return formatted
+                .replace('Partlycloudy', 'Partly Cloudy');
+        }
+        
+        function formatPressure(attr) {
+            if (!attr.pressure) return 'N/A';
+            const pressure = attr.pressure;
+            const unit = attr.pressure_unit || 'hPa';
+            
+            if (unit === 'hPa' || unit === 'mbar') {
+                const inches = (pressure * 0.02953).toFixed(2);
+                return `${inches} inches`;
+            }
+            return `${pressure} ${unit}`;
+        }
+        
+        function formatVisibility(attr) {
+            if (!attr.visibility) return 'N/A';
+            const vis = attr.visibility;
+            const unit = attr.visibility_unit || 'km';
+            
+            if (unit === 'km') {
+                const miles = (vis * 0.621371).toFixed(0);
+                return `${miles} miles`;
+            }
+            return `${vis} ${unit}`;
+        }
+        
+        function formatWind(attr) {
+            if (!attr.wind_speed) return 'Calm';
+            const speed = Math.round(attr.wind_speed);
+            const direction = formatWindDirection(attr.wind_bearing);
+            return `${direction} ${speed}`;
+        }
+        
+        function formatGusts(attr) {
+            if (!attr.wind_gust_speed) return 'None';
+            const speed = Math.round(attr.wind_gust_speed);
+            return `${speed}`;
+        }
+        
+        function formatWindDirection(bearing) {
+            if (!bearing && bearing !== 0) return '';
+            const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+            const index = Math.round(bearing / 22.5) % 16;
+            return directions[index];
         }
 
         // Rotate sections
@@ -620,9 +904,8 @@
         setInterval(updateTime, 1000);
         
         loadConfig();
-        setInterval(fetchWeather, 300000); // Update every 5 minutes
+        setInterval(fetchWeather, 300000);
         
-        // Rotate sections based on config
         setInterval(() => {
             rotateSection();
         }, (config.display_duration || 10) * 1000);
