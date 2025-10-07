@@ -32,10 +32,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.http.register_view(LocalOnThe10sConfigView(entry))
 
     # Register the panel
-    hass.http.register_static_path(
-        f"/local/{DOMAIN}",
-        hass.config.path(f"custom_components/{DOMAIN}/www"),
-        cache_headers=False,
+    await hass.http.async_register_static_paths(
+        [
+            {
+                "url": f"/local/{DOMAIN}",
+                "path": hass.config.path(f"custom_components/{DOMAIN}/www"),
+                "cache_headers": False,
+            }
+        ]
     )
 
     # Register frontend panel

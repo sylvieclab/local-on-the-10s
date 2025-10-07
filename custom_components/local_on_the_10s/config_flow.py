@@ -69,15 +69,11 @@ class LocalOnThe10sConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         config_entry: config_entries.ConfigEntry,
     ) -> LocalOnThe10sOptionsFlow:
         """Get the options flow for this handler."""
-        return LocalOnThe10sOptionsFlow(config_entry)
+        return LocalOnThe10sOptionsFlow()
 
 
 class LocalOnThe10sOptionsFlow(config_entries.OptionsFlow):
     """Handle options flow for Local on the 10s."""
-
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        """Initialize options flow."""
-        self.config_entry = config_entry
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
