@@ -552,6 +552,9 @@
             display_duration: 10
         };
 
+        // Get the base path for assets - relative to the www directory
+        const ASSETS_PATH = './assets/svg';
+
         // Map Home Assistant conditions to Weather Channel icon filenames
         function getWeatherIconPath(condition, isNight = false) {
             const iconMap = {
@@ -573,12 +576,34 @@
             };
             
             const filename = iconMap[condition] || 'Sunny.png';
-            return `/local_on_the_10s/assets/svg/${encodeURIComponent(filename)}`;
+            return `${ASSETS_PATH}/${encodeURIComponent(filename)}`;
         }
 
         function getWeatherIcon(condition, isNight = false) {
             const iconPath = getWeatherIconPath(condition, isNight);
-            return `<img src="${iconPath}" alt="${condition}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            return `<img src="${iconPath}" alt="${condition}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:64px;\\'>${getIconFallback(condition)}</div>'">`;
+        }
+
+        // Fallback emoji icons if PNG fails to load
+        function getIconFallback(condition) {
+            const fallbacks = {
+                'clear-night': '🌙',
+                'cloudy': '☁️',
+                'fog': '🌫️',
+                'hail': '🧊',
+                'lightning': '⚡',
+                'lightning-rainy': '⛈️',
+                'partlycloudy': '⛅',
+                'pouring': '🌧️',
+                'rainy': '🌦️',
+                'snowy': '❄️',
+                'snowy-rainy': '🌨️',
+                'sunny': '☀️',
+                'windy': '💨',
+                'windy-variant': '🌬️',
+                'exceptional': '⚠️'
+            };
+            return fallbacks[condition] || '🌤️';
         }
 
         let currentSectionIndex = 0;
