@@ -9,6 +9,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv
 from homeassistant.components.http import HomeAssistantView, StaticPathConfig
+from homeassistant.components import frontend
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,7 +44,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
 
     # Register frontend panel
-    await hass.components.frontend.async_register_built_in_panel(
+    await frontend.async_register_built_in_panel(
+        hass,
         "iframe",
         entry.data.get("location_name", "Local on the 10s"),
         "mdi:weather-partly-cloudy",
