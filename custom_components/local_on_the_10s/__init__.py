@@ -53,6 +53,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         ]
     )
 
+    # Register Lovelace card resource
+    hass.http.register_static_path(
+        f"/local_on_the_10s/local-on-the-10s-card.js",
+        hass.config.path(f"custom_components/{DOMAIN}/www/local-on-the-10s-card.js"),
+        False
+    )
+
     # Register frontend panel
     async_register_built_in_panel(
         hass,
