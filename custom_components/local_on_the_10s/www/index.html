@@ -74,6 +74,15 @@
             position: relative;
             z-index: 2;
         }
+        
+        /* When in iframe/card, make body and app fill container */
+        body.in-card {
+            height: 100%;
+        }
+        
+        body.in-card #app {
+            height: 100%;
+        }
 
         /* Film grain overlay for authentic broadcast look */
         #app::before {
@@ -160,6 +169,141 @@
         .weather-section.active {
             display: flex;
             animation: fadeIn 0.8s ease-in;
+        }
+        
+        /* Full-screen radar layout */
+        .weather-section.radar-fullscreen {
+            padding: 0;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+        
+        /* Combined radar header banner - two-row centered design */
+        .weather-section.radar-fullscreen .local-header {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            transform: none;
+            z-index: 100;
+            width: 100%;
+            max-width: none;
+        }
+        
+        /* Row 1: Title and subtitle on same line */
+        .weather-section.radar-fullscreen .radar-banner-row1 {
+            background: linear-gradient(180deg, 
+                rgba(35, 55, 75, 0.92) 0%, 
+                rgba(25, 40, 60, 0.94) 100%);
+            padding: 12px 30px;
+            text-align: center;
+            box-shadow: 
+                0 3px 8px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(80, 120, 160, 0.4);
+            border-bottom: none;
+        }
+        
+        .weather-section.radar-fullscreen .radar-banner-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: lowercase;
+            letter-spacing: 1.5px;
+            color: white;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.4),
+                2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+        
+        /* Row 2: Radar type and location split */
+        .weather-section.radar-fullscreen .radar-banner-row2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(180deg, 
+                rgba(25, 40, 60, 0.94) 0%, 
+                rgba(18, 30, 48, 0.96) 100%);
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(80, 120, 160, 0.4);
+            border-top: 1px solid rgba(100, 140, 180, 0.3);
+            overflow: hidden;
+        }
+        
+        .weather-section.radar-fullscreen .section-header {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            background: transparent;
+            padding: 10px 20px;
+            font-size: 22px;
+            font-weight: normal;
+            text-transform: lowercase;
+            text-align: center;
+            color: white;
+            text-shadow: 
+                0 0 8px rgba(255, 255, 255, 0.3),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            border-right: 1px solid rgba(100, 140, 180, 0.3);
+            margin: 0;
+            max-width: none;
+        }
+        
+        .weather-section.radar-fullscreen .location-header {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.25) 0%,
+                rgba(255, 255, 255, 0) 50%),
+            linear-gradient(180deg, 
+                #d8f050 0%, 
+                #c8e048 15%,
+                #b0cc38 40%,
+                #98b828 70%,
+                #80a020 100%);
+            padding: 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            color: white;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                2px 2px 3px rgba(0, 0, 0, 0.8);
+            border: none;
+            box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            border-radius: 0;
+            margin: 0;
+            max-width: none;
+        }
+        
+        .weather-section.radar-fullscreen .data-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            padding: 0;
+        }
+        
+        .weather-section.radar-fullscreen .data-panel::before,
+        .weather-section.radar-fullscreen .data-panel::after {
+            display: none;
         }
 
         @keyframes fadeIn {
@@ -254,9 +398,9 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 5%;
-            right: 5%;
-            height: 40%;
+            left: 0%;
+            right: 0%;
+            height: 50%;
             background: linear-gradient(180deg, 
                 rgba(255, 255, 255, 0.08) 0%,
                 rgba(255, 255, 255, 0.04) 50%,
@@ -265,12 +409,13 @@
             border-radius: inherit;
         }
 
-        /* Radar map container */
+        /* Radar map container - fills full screen */
         .radar-container {
             width: 100%;
-            height: 500px;
-            position: relative;
-            border-radius: 4px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
             overflow: hidden;
             background: #1a2a3a;
         }
@@ -295,6 +440,21 @@
             font-size: 18px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 1000;
+        }
+        
+        /* Radar timestamp overlay - styled like Local On The 8's */
+        .radar-timestamp {
+            position: absolute;
+            bottom: 90px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1001;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.5px;
         }
 
         /* Current Conditions Layout - 2005 TWO COLUMN */
@@ -510,6 +670,11 @@
             align-items: center;
             gap: 18px;
         }
+        .footer-center {
+            display: flex; 
+            align-items: center; 
+            gap: 20px;
+        }
 
         .current-location {
             font-weight: bold;
@@ -533,7 +698,26 @@
 
         .moon-display {
             font-weight: bold;
-            font-size: 24px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Hide stacked layout by default, show inline */
+        .sun-display-large,
+        .moon-display-large {
+            display: block;
+            font-size: 28px;
+        }
+
+        .sun-moon-display {
+            display: none;
+            text-align: center;
+        }
+
+        .sun-times, .moon-times {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
@@ -574,6 +758,11 @@
             z-index: 50;
             text-align: center;
         }
+        
+        /* Hide main local-header when radar section is active */
+        body:has(.weather-section.radar-fullscreen.active) > #app > .local-header {
+            display: none;
+        }
 
         .local-title {
             font-size: 48px;
@@ -595,6 +784,520 @@
             letter-spacing: 3px;
             color: #b3e5fc;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .local-title {
+                font-size: 32px;
+            }
+            .local-subtitle {
+                font-size: 16px;
+            }
+            .section-header {
+                font-size: 26px;
+            }
+            .location-header {
+                font-size: 24px;
+                padding: 10px 25px;
+            }
+            .data-panel {
+                padding: 25px;
+            }
+            .temp-large {
+                font-size: 110px;
+            }
+            .weather-icon-large {
+                width: 130px;
+                height: 130px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .local-header {
+                top: 5px;
+            }
+            .local-title {
+                font-size: 24px;
+                margin-bottom: 2px;
+            }
+            .local-subtitle {
+                font-size: 12px;
+            }
+            .content {
+                padding: 15px 15px 58px;
+            }
+            .section-header {
+                font-size: 18px;
+                padding: 4px 12px;
+            }
+            .location-header {
+                font-size: 17px;
+                padding: 5px 12px;
+            }
+            .data-panel {
+                padding: 15px;
+            }
+            .radar-timestamp {
+                font-size: 14px;
+                padding: 6px 12px;
+                bottom: 80px;
+                left: 10px;
+            }
+            
+            .weather-section.radar-fullscreen .local-header {
+                top: 0px;
+                width: 100%;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-title {
+                font-size: 18px;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-row1 {
+                padding: 8px 20px;
+            }
+            
+            .weather-section.radar-fullscreen .section-header {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+            
+            .weather-section.radar-fullscreen .location-header {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+            .current-layout {
+                grid-template-columns: 200px 1fr;
+                gap: 20px;
+                min-height: auto;
+            }
+            .current-icon-temp {
+                padding-right: 15px;
+            }
+            .temp-large {
+                font-size: 75px;
+                letter-spacing: -5px;
+            }
+            .weather-icon-large {
+                width: 85px;
+                height: 85px;
+                margin-bottom: 8px;
+            }
+            .condition-text {
+                font-size: 18px;
+                margin: 8px 0 12px;
+            }
+            .current-details {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px 20px;
+                padding-left: 10px;
+            }
+            .detail-row {
+                padding: 4px 0;
+            }
+            .detail-label {
+                font-size: 14px;
+            }
+            .detail-value {
+                font-size: 18px;
+            }
+            .forecast-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 6px;
+            }
+            .forecast-card {
+                padding: 10px 4px;
+            }
+            .forecast-day {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+            .forecast-icon {
+                width: 40px;
+                height: 40px;
+                margin: 8px auto;
+            }
+            .forecast-condition {
+                font-size: 11px;
+                min-height: 30px;
+            }
+            .forecast-temps {
+                font-size: 20px;
+                margin-top: 4px;
+            }
+            .text-forecast {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+            .text-forecast p {
+                margin-bottom: 15px;
+            }
+            .forecast-period {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+            .footer-bar {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .footer-left {
+                flex-direction: column;
+                gap: 3px;
+                align-items: flex-start;
+            }
+            .time-display {
+                font-size: 15px;
+            }
+            .sun-display {
+                font-size: 16px;
+            }
+            .moon-display {
+                font-size: 16px;
+            }
+            .current-temp-small {
+                font-size: 16px;
+            }
+            .current-location {
+                font-size: 15px;
+            }
+            .twc-logo {
+                font-size: 8px;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .local-header {
+                top: 5px;
+            }
+            .local-title {
+                font-size: 20px;
+                margin-bottom: 1px;
+            }
+            .local-subtitle {
+                font-size: 10px;
+                letter-spacing: 1.5px;
+            }
+            .content {
+                padding: 18px 12px 60px;
+            }
+            .section-header {
+                font-size: 16px;
+                padding: 4px 12px;
+            }
+            .location-header {
+                font-size: 16px;
+                padding: 6px 12px;
+            }
+            .data-panel {
+                padding: 12px;
+            }
+            .current-layout {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .current-icon-temp {
+                border-right: none;
+                border-bottom: 2px solid rgba(80, 120, 180, 0.4);
+                padding-right: 0;
+                padding-bottom: 12px;
+            }
+            .current-icon-temp::after {
+                display: none;
+            }
+            .temp-large {
+                font-size: 70px;
+            }
+            .weather-icon-large {
+                width: 80px;
+                height: 80px;
+            }
+            .condition-text {
+                font-size: 16px;
+            }
+            .current-details {
+                padding-left: 0;
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .detail-label {
+                font-size: 13px;
+            }
+            .detail-value {
+                font-size: 16px;
+            }
+            .forecast-grid {
+                grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+                gap: 5px;
+            }
+            .forecast-card {
+                padding: 8px 3px;
+            }
+            .forecast-day {
+                font-size: 13px;
+            }
+            .forecast-icon {
+                width: 36px;
+                height: 36px;
+                margin: 6px auto;
+            }
+            .forecast-condition {
+                font-size: 10px;
+                min-height: 28px;
+            }
+            .forecast-temps {
+                font-size: 18px;
+            }
+            .text-forecast {
+                font-size: 14px;
+            }
+            .forecast-period {
+                font-size: 16px;
+            }
+            .radar-timestamp {
+                font-size: 12px;
+                padding: 5px 10px;
+                bottom: 75px;
+                left: 8px;
+            }
+            
+            .weather-section.radar-fullscreen .local-header {
+                top: 0px;
+                width: 98%;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-title {
+                font-size: 14px;
+                letter-spacing: 0.8px;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-row1 {
+                padding: 6px 15px;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-row2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .weather-section.radar-fullscreen .section-header {
+                font-size: 14px;
+                padding: 6px 10px;
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 140, 180, 0.3);
+            }
+            
+            .weather-section.radar-fullscreen .location-header {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            .footer-bar {
+                padding: 6px 12px;
+                font-size: 13px;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .footer-left {
+                gap: 6px;
+                flex-direction: row;
+            }
+            .footer-center {
+                display: flex; 
+                align-items: center; 
+                gap: 15px;
+            }
+            .time-display {
+                font-size: 15px;
+            }
+            .sun-display {
+                font-size:15px;
+            }
+            .moon-display {
+                font-size: 15px;
+            }
+            .current-temp-small {
+                font-size: 16px;
+            }
+            .current-location {
+                font-size: 16px;
+            }
+            .twc-logo {
+                font-size: 9px;
+                padding: 7px 10px;
+            }
+        }
+        @media (max-width: 500px) {
+            .local-header {
+                top: 3px;
+            }
+            .local-title {
+                font-size: 16px;
+                margin-bottom: 0px;
+            }
+            .local-subtitle {
+                font-size: 8px;
+                letter-spacing: 0.8px;
+            }
+            .content {
+                padding: 12px 8px 50px;
+            }
+            .section-header {
+                font-size: 13px;
+                padding: 3px 8px;
+            }
+            .location-header {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+            .data-panel {
+                padding: 8px;
+            }
+            .temp-large {
+                font-size: 55px;
+            }
+            .weather-icon-large {
+                width: 60px;
+                height: 60px;
+            }
+            .condition-text {
+                font-size: 13px;
+            }
+            .detail-label {
+                font-size: 11px;
+            }
+            .detail-value {
+                font-size: 13px;
+            }
+            .forecast-grid {
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                gap: 3px;
+            }
+            .forecast-card {
+                padding: 5px 2px;
+            }
+            .forecast-day {
+                font-size: 10px;
+            }
+            .forecast-icon {
+                width: 28px;
+                height: 28px;
+                margin: 3px auto;
+            }
+            .forecast-condition {
+                font-size: 8px;
+                min-height: 20px;
+            }
+            .forecast-temps {
+                font-size: 14px;
+            }
+            .text-forecast {
+                font-size: 11px;
+            }
+            .forecast-period {
+                font-size: 13px;
+            }
+            .radar-timestamp {
+                font-size: 10px;
+                padding: 4px 6px;
+                bottom: 110px;
+                left: 5px;
+            }
+            .radar-map{
+                width: 100%;
+                height: 77%;
+                top: 40px;
+            }
+            
+            .weather-section.radar-fullscreen .local-header {
+                top: 0px;
+                width: 100%;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-title {
+                font-size: 11px;
+                letter-spacing: 0.4px;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-row1 {
+                padding: 4px 10px;
+            }
+            
+            .weather-section.radar-fullscreen .radar-banner-row2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .weather-section.radar-fullscreen .radar-banner-row2 {
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+            
+            .weather-section.radar-fullscreen .section-header {
+                font-size: 11px;
+                padding: 4px 6px;
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 140, 180, 0.3);
+            }
+            
+            .weather-section.radar-fullscreen .location-header {
+                font-size: 11px;
+                padding: 4px 6px;
+            }
+            .footer-bar {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+            .footer-left {
+                gap: 3px;
+                flex-direction: row;
+            }
+            .footer-center {
+                display: flex; 
+                align-items: center; 
+                gap: 15px;
+            }
+            .time-display {
+                font-size: 15px;
+            }
+            .sun-display {
+                font-size:15px;
+            }
+            .moon-display {
+                font-size: 15px;
+            }
+            .current-temp-small {
+                font-size: 13px;
+            }
+            .current-location {
+                font-size: 13px;
+            }
+            .twc-logo {
+                font-size: 7px;
+                padding: 5px 6px;
+            }
+            .current-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .current-icon-temp {
+                border-right: none;
+                border-bottom: none;
+                padding-right: 0;
+                padding-bottom: 10px;
+            }
+            
+            .current-icon-temp::after {
+                display: none;
+            }
+            
+            .current-details {
+                padding-left: 0;
+                grid-template-columns: 1fr;
+                gap: 6px;
+                padding-right: 10px;
+            }
+            
+            .detail-row {
+                padding: 3px 0;
+            }
         }
     </style>
 </head>
@@ -644,27 +1347,41 @@
             </div>
 
             <!-- Local Radar -->
-            <div id="local-radar-section" class="weather-section">
-                <div class="section-header">local radar</div>
-                <div class="location-header" id="location-header-local-radar">LOADING...</div>
+            <div id="local-radar-section" class="weather-section radar-fullscreen">
+                <div class="local-header">
+                    <div class="radar-banner-row1">
+                        <div class="radar-banner-title">local on the 10's - your local weather authority</div>
+                    </div>
+                    <div class="radar-banner-row2">
+                        <div class="section-header">local radar</div>
+                        <div class="location-header" id="location-header-local-radar">LOADING...</div>
+                    </div>
+                </div>
                 <div class="data-panel">
                     <div class="radar-container">
                         <div class="radar-loading" id="local-radar-loading">Loading radar...</div>
                         <div id="local-radar-map" class="radar-map"></div>
-                        <div id="local-radar-timestamp" style="position: absolute; bottom: 15px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 4px; font-size: 18px; z-index: 1001; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);"></div>
+                        <div id="local-radar-timestamp" class="radar-timestamp"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Regional Radar -->
-            <div id="regional-radar-section" class="weather-section">
-                <div class="section-header">regional radar</div>
-                <div class="location-header" id="location-header-regional-radar">LOADING...</div>
+            <div id="regional-radar-section" class="weather-section radar-fullscreen">
+                <div class="local-header">
+                    <div class="radar-banner-row1">
+                        <div class="radar-banner-title">local on the 10's - your local weather authority</div>
+                    </div>
+                    <div class="radar-banner-row2">
+                        <div class="section-header">regional radar</div>
+                        <div class="location-header" id="location-header-regional-radar">LOADING...</div>
+                    </div>
+                </div>
                 <div class="data-panel">
                     <div class="radar-container">
                         <div class="radar-loading" id="regional-radar-loading">Loading radar...</div>
                         <div id="regional-radar-map" class="radar-map"></div>
-                        <div id="regional-radar-timestamp" style="position: absolute; bottom: 15px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 4px; font-size: 18px; z-index: 1001; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);"></div>
+                        <div id="regional-radar-timestamp" class="radar-timestamp"></div>
                     </div>
                 </div>
             </div>
@@ -675,11 +1392,11 @@
                 <span class="current-location" id="footer-location">ROCKLAND</span>
                 <span class="current-temp-small" id="footer-temp">19°</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="footer-center">
                 <div class="time-display" id="date-display">TUE OCT 07</div>
                 <div class="time-display" id="time-display">3:39 PM</div>
-                <div class="time-display" id="sun-display" style="font-size: 20px;">☀️ 6:45↑ 6:32↓</div>
-                <div class="moon-display" id="moon-display" style="font-size: 20px;">🌙 --</div>
+                <div class="time-display sun-display-large" id="sun-display">☀️ 6:45↑ 6:32↓</div>
+                <div class="moon-display moon-display-large" id="moon-display">🌙 --</div>
             </div>
             <div class="twc-logo">LOCAL<br>WEATHER</div>
         </div>
@@ -687,108 +1404,111 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        console.log('🔄 Local on the 10s - Version 3.9.1 - Fixed Moon Phase Bug');
-        
-        // Configuration
-        let config = {
-            location_name: "Home",
-            display_name: "LOCAL AREA",
-            region_name: "",
-            weather_entity: null,
-            display_duration: 10,
-            latitude: null,
-            longitude: null
-        };
+    console.log('🔄 Local on the 10s - Version 4.0.1 - Fixed Sun/Moon Display');
+    
+    // Configuration
+    let config = {
+        location_name: "Home",
+    display_name: "LOCAL AREA",
+    region_name: "",
+    weather_entity: null,
+    display_duration: 10,
+    latitude: null,
+    longitude: null
+    };
 
         // Background images array
-        const BACKGROUNDS = [
-            '/local_on_the_10s/backgrounds/clouds%20at%20dusk.jpg',
-            '/local_on_the_10s/backgrounds/dark%20clouds%20evening%20time.jpg'
-        ];
+    const BACKGROUNDS = [
+        '/local_on_the_10s/backgrounds/clouds%20at%20dusk.jpg',
+    '/local_on_the_10s/backgrounds/dark%20clouds%20evening%20time.jpg'
+    ];
 
         let currentBackgroundIndex = 0;
-        let localRadarMap = null;
-        let regionalRadarMap = null;
-        let radarFrames = [];
-        let radarAnimationFrame = 0;
-        let radarAnimationInterval = null;
+    let localRadarMap = null;
+    let regionalRadarMap = null;
+    let radarFrames = [];
+    let radarAnimationFrame = 0;
+    let radarAnimationInterval = null;
 
         // Set background image
-        function setBackgroundImage(index) {
-            const bgIndex = index % BACKGROUNDS.length;
-            document.body.style.setProperty('--bg-image', `url('${BACKGROUNDS[bgIndex]}')`);
-        }
+    function setBackgroundImage(index) {
+        const bgIndex = index % BACKGROUNDS.length;
+    document.body.style.setProperty('--bg-image', `url('${BACKGROUNDS[bgIndex]}')`);  
+    }
 
         // Update background when section changes
-        function updateBackground() {
-            currentBackgroundIndex = (currentBackgroundIndex + 1) % BACKGROUNDS.length;
-            setBackgroundImage(currentBackgroundIndex);
-        }
+    function updateBackground() {
+        currentBackgroundIndex = (currentBackgroundIndex + 1) % BACKGROUNDS.length;
+    setBackgroundImage(currentBackgroundIndex);
+    }
 
         // Get the base path for assets
-        const ASSETS_PATH = '/local_on_the_10s/assets/svg';
+    const ASSETS_PATH = '/local_on_the_10s/assets/svg';
 
         // Map Home Assistant conditions to Weather Channel icon filenames
-        function getWeatherIconPath(condition, isNight = false) {
-            const iconMap = {
-                'clear-night': 'Fair-Mostly Clear (night).png',
-                'cloudy': 'Cloudy.png',
-                'fog': 'Foggy Conditions.png',
-                'hail': 'Sleet.png',
-                'lightning': 'Thunderstorms.png',
-                'lightning-rainy': 'Thunderstorms.png',
-                'partlycloudy': isNight ? 'Partly Cloudy (night).png' : 'Partly Cloudy (day).png',
-                'pouring': 'Heavy Rain and Wind.png',
-                'rainy': 'Rain.png',
-                'snowy': 'Snow.png',
-                'snowy-rainy': 'Rain and Snow.png',
-                'sunny': 'Sunny.png',
-                'windy': 'Windy Conditions.png',
-                'windy-variant': 'Clear and Windy.png',
-                'exceptional': 'Not Available.png'
-            };
-            
-            const filename = iconMap[condition] || 'Sunny.png';
-            return `${ASSETS_PATH}/${encodeURIComponent(filename)}`;
-        }
+    function getWeatherIconPath(condition, isNight = false) {
+        const iconMap = {
+        'clear-night': 'Fair-Mostly Clear (night).png',
+    'cloudy': 'Cloudy.png',
+    'fog': 'Foggy Conditions.png',
+    'hail': 'Sleet.png',
+    'lightning': 'Thunderstorms.png',
+    'lightning-rainy': 'Thunderstorms.png',
+    'partlycloudy': isNight ? 'Partly Cloudy (night).png' : 'Partly Cloudy (day).png',
+    'pouring': 'Heavy Rain and Wind.png',
+    'rainy': 'Rain.png',
+    'snowy': 'Snow.png',
+    'snowy-rainy': 'Rain and Snow.png',
+    'sunny': 'Sunny.png',
+    'windy': 'Windy Conditions.png',
+    'windy-variant': 'Clear and Windy.png',
+    'exceptional': 'Not Available.png'
+    };
+    
+    const filename = iconMap[condition] || 'Sunny.png';
+    return `${ASSETS_PATH}/${encodeURIComponent(filename)}`;
+    }
 
         function getWeatherIcon(condition, isNight = false) {
-            const iconPath = getWeatherIconPath(condition, isNight);
-            return `<img src="${iconPath}" alt="${condition}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:64px;\\'>${getIconFallback(condition)}</div>'">`;
-        }
+        const iconPath = getWeatherIconPath(condition, isNight);
+    return `<img src="${iconPath}" alt="${condition}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:64px;\\'>${getIconFallback(condition)}</div>'">`;
+    }
 
         // Fallback emoji icons if PNG fails to load
-        function getIconFallback(condition) {
-            const fallbacks = {
-                'clear-night': '🌙',
-                'cloudy': '☁️',
-                'fog': '🌫️',
-                'hail': '🧊',
-                'lightning': '⚡',
-                'lightning-rainy': '⛈️',
-                'partlycloudy': '⛅',
-                'pouring': '🌧️',
-                'rainy': '🌦️',
-                'snowy': '❄️',
-                'snowy-rainy': '🌨️',
-                'sunny': '☀️',
-                'windy': '💨',
-                'windy-variant': '🌬️',
-                'exceptional': '⚠️'
-            };
-            return fallbacks[condition] || '🌤️';
-        }
+    function getIconFallback(condition) {
+        const fallbacks = {
+        'clear-night': '🌙',
+    'cloudy': '☁️',
+    'fog': '🌫️',
+    'hail': '🧊',
+    'lightning': '⚡',
+    'lightning-rainy': '⛈️',
+    'partlycloudy': '⛅',
+    'pouring': '🌧️',
+    'rainy': '🌦️',
+    'snowy': '❄️',
+    'snowy-rainy': '🌨️',
+    'sunny': '☀️',
+    'windy': '💨',
+    'windy-variant': '🌬️',
+    'exceptional': '⚠️'
+    };
+    return fallbacks[condition] || '🌤️';
+    }
 
         let currentSectionIndex = 0;
-        const sections = ['current', 'tonight-forecast', 'tomorrow-forecast', 'forecast', 'local-radar', 'regional-radar'];
-        let weatherData = null;
-        let forecastData = null;
+    //const sections = ['tonight-forecast'];
+    const sections = ['current', 'tonight-forecast', 'tomorrow-forecast', 'forecast', 'local-radar', 'regional-radar'];
+    let weatherData = null;
+    let forecastData = null;
 
         console.log('📋 Section rotation order:', sections);
 
         // Get config ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const configId = urlParams.get('config_id');
+    const urlParams = new URLSearchParams(window.location.search);
+    const configId = urlParams.get('config_id');
+    
+        console.log('📋 Config ID for dashboard card:', configId || 'Not found in URL');
 
         // Initialize radar maps
         function initializeRadarMaps() {
@@ -1034,7 +1754,7 @@
             document.getElementById('date-display').textContent = dateString;
         }
         
-        // Update sunrise/sunset display
+        // Update sunrise/sunset display  
         function updateSunTimes() {
             if (!weatherData || !weatherData.attributes) return;
             
@@ -1455,6 +2175,28 @@
             
             const next = document.getElementById(`${sections[currentSectionIndex]}-section`);
             next.classList.add('active');
+            
+            // Hide/show main header based on whether radar is active
+            const mainHeader = document.querySelector('#app > .local-header');
+            if (mainHeader) {
+                if (sections[currentSectionIndex] === 'local-radar' || sections[currentSectionIndex] === 'regional-radar') {
+                    mainHeader.style.display = 'none';
+                } else {
+                    mainHeader.style.display = 'block';
+                }
+            }
+            
+            // Adjust content wrapper for radar screens
+            const contentDiv = document.querySelector('.content');
+            if (contentDiv) {
+                if (sections[currentSectionIndex] === 'local-radar' || sections[currentSectionIndex] === 'regional-radar') {
+                    contentDiv.style.height = '100%';
+                    contentDiv.style.padding = '0';
+                } else {
+                    contentDiv.style.height = 'calc(100% - 70px)';
+                    contentDiv.style.padding = '40px';
+                }
+            }
             
             console.log(`🔄 Rotated to section: ${sections[currentSectionIndex]}`);
             

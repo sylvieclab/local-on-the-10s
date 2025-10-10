@@ -3,7 +3,7 @@
 A nostalgic recreation of The Weather Channel's "Local on the 8s" (rebranded here as "Local on the 10s") featuring authentic 2005 IntelliStar styling.
 
 ![Local on the 10s](https://img.shields.io/badge/Home%20Assistant-Custom%20Integration-blue)
-![Version](https://img.shields.io/badge/version-0.1.0-green)
+![Version](https://img.shields.io/badge/version-0.2.1-green)
 
 ## Overview
 
